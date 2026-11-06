@@ -38,7 +38,7 @@ lists what it filled. It never submits. Results on 2026-11-06 with a sample prof
 |---|---|
 | Notion (Ashby) | 10 / 10 |
 | Spotify (Lever) | 16 / 18 |
-| Palantir (Lever) | 15 / 21 |
+| Palantir (Lever) | 14 / 21 |
 | Discord (Greenhouse) | 19 / 27 |
 
 What's left blank is mostly open-ended questions ("Why do you want to work here?"), which the AI
