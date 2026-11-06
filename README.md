@@ -30,10 +30,26 @@ workflow (`.github/workflows/build-apk.yml`) builds the APK. Download it from th
 The studio shows the code next to the running app and reloads on every save. In the browser,
 "Apply" opens a sample form (`demo-form.html`) so you can watch autofill work.
 
+## Tested on real applications
+`node tests/live-sites.js <application url>…` runs the autofill engine against live forms and
+lists what it filled. It never submits. Results on 2026-11-06 with a sample profile:
+
+| Form | Filled |
+|---|---|
+| Notion (Ashby) | 10 / 10 |
+| Spotify (Lever) | 16 / 18 |
+| Palantir (Lever) | 15 / 21 |
+| Discord (Greenhouse) | 19 / 27 |
+
+What's left blank is mostly open-ended questions ("Why do you want to work here?"), which the AI
+drafting covers, and job-specific questions only you can answer ("Are you a Singapore citizen?").
+Greenhouse's location and school pickers couldn't be checked in the test environment.
+
 ## Layout
     app/src/main/assets/www/   UI (HTML/CSS/JS): app.js, store.js, ai.js, autofill.js
     app/src/main/java/...      MainActivity (hosts the UI, share intent), ApplyActivity (job site + autofill)
     studio/                    live side-by-side preview server
+    tests/live-sites.js        autofill check against real application forms (never submits)
 
 ## Notes
 - Your data lives only on the device. The API key is excluded from exports.

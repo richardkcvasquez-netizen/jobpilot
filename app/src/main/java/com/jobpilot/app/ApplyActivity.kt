@@ -131,16 +131,37 @@ class ApplyActivity : Activity() {
 
     private fun space() = View(this).apply { layoutParams = LinearLayout.LayoutParams(12, 1) }
 
+    private var fillGeneration = 0
+
+    /** Starts the (asynchronous) autofill in the page, then polls for its report. */
     private fun runAutofill() {
-        val js = "$autofillJs\n;JSON.stringify(window.__jobpilot.run($payload))"
-        web.evaluateJavascript(js) { raw ->
+        val gen = ++fillGeneration
+        status.text = "Filling in your details…"
+        web.evaluateJavascript("$autofillJs\n;window.__jobpilot.start($payload);0", null)
+        pollReport(gen, 0)
+    }
+
+    private fun pollReport(gen: Int, attempt: Int) {
+        if (gen != fillGeneration || isFinishing) return
+        web.evaluateJavascript("window.__jobpilot ? JSON.stringify(window.__jobpilot.status()) : null") { raw ->
             val report = try { JSONObject(JSONObject("{\"v\":$raw}").getString("v")) } catch (e: Exception) { null }
-                ?: return@evaluateJavascript
+            if (report == null) {
+                // Still running (dropdowns take a moment each). Give up after ~45 seconds.
+                if (attempt < 90) web.postDelayed({ pollReport(gen, attempt + 1) }, 500)
+                else status.text = "Autofill is taking too long on this page. Tap Autofill to try again."
+                return@evaluateJavascript
+            }
+            showReport(report)
+        }
+    }
+
+    private fun showReport(report: JSONObject) {
+        run {
             val redirect = report.optString("redirect")
             if (redirect.isNotEmpty() && redirect != "null") {
                 status.text = "Opening the embedded application form…"
                 web.loadUrl(redirect)
-                return@evaluateJavascript
+                return@run
             }
             val prev = bestReport
             if (prev == null || report.optString("description").length >= prev.optString("description").length ||
@@ -157,8 +178,8 @@ class ApplyActivity : Activity() {
                 else -> buildString {
                     append("Filled $filled of $total fields")
                     if (report.optBoolean("resumeAttached")) append(" · resume attached")
-                    if (open > 0) append(" · $open question(s) need you. Fields in red still need you.")
-                    append(". Review, submit, then tap Applied ✓.")
+                    if (open > 0) append(" · $open question(s) need your answer")
+                    append(". Fields in red need you. Review, submit, then tap Applied ✓.")
                 }
             }
             if (total == 0 && report.optBoolean("applyButton")) web.postDelayed({ runAutofill() }, 1500)

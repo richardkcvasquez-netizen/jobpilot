@@ -127,10 +127,11 @@
       <iframe src="demo-form.html"></iframe><div id="rep" class="muted" style="padding:6px 10px;background:var(--card);border-top:1px solid var(--line)">Loading…</div>`;
     document.body.appendChild(ov);
     const fr = $('iframe', ov); let report = null;
-    const fill = () => {
+    const fill = async () => {
       const w = fr.contentWindow, d = fr.contentDocument;
       if (!w.__jobpilot) { const s = d.createElement('script'); s.textContent = AUTOFILL_SRC; d.head.appendChild(s); }
-      report = w.__jobpilot.run(payload);
+      $('#rep', ov).textContent = 'Filling…';
+      report = await w.__jobpilot.run(payload);
       $('#rep', ov).innerHTML = `Filled <b>${report.filled}</b> of ${report.total} fields${report.resumeAttached ? ' · resume attached' : ''}${report.unanswered.length ? ` · <b>${report.unanswered.length}</b> question(s) need you or AI` : ''}`;
     };
     fr.onload = () => setTimeout(fill, 250);
