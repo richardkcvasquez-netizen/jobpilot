@@ -1,0 +1,9 @@
+<resources>
+    <style name="Theme.JobPilot" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:colorPrimary">#3B5BFD</item>
+        <item name="android:colorAccent">#3B5BFD</item>
+        <item name="android:statusBarColor">#F6F7FB</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowBackground">@android:color/white</item>
+    </style>
+</resources>

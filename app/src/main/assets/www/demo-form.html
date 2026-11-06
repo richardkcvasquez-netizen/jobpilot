@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Senior Product Designer — Acme Robotics</title>
+<style>
+body{font:15px/1.5 system-ui,sans-serif;margin:0;background:#fff;color:#222}
+.wrap{padding:16px;max-width:640px;margin:auto}
+h1{font-size:20px;margin:4px 0}.co{color:#666}
+.description{font-size:14px;color:#444;border-bottom:1px solid #eee;padding-bottom:12px}
+.field{margin:14px 0}label,legend{display:block;font-weight:600;font-size:14px;margin-bottom:4px}
+input[type=text],input[type=email],input[type=tel],input[type=url],select,textarea{width:100%;box-sizing:border-box;padding:9px;border:1px solid #ccc;border-radius:6px;font:inherit}
+textarea{min-height:90px}fieldset{border:0;padding:0;margin:14px 0}
+fieldset label{font-weight:400;display:inline-flex;gap:6px;margin-right:16px}
+button{background:#1a7f37;color:#fff;border:0;padding:12px 18px;border-radius:6px;font:inherit;font-weight:600;width:100%}
+.req{color:#c00}
+</style></head><body><div class="wrap">
+<div class="co">Acme Robotics · Remote (US)</div>
+<h1>Senior Product Designer</h1>
+<div class="description">
+<p>Acme builds warehouse robots. You'll own the design of our operator app used by 4,000 floor staff daily, partner with
+engineering on a shared design system, and run research on the warehouse floor. 5+ years of product design, strong
+interaction design and prototyping skills, experience with design systems. Bonus: industrial or B2B tools.</p>
+</div>
+<form onsubmit="event.preventDefault();document.body.innerHTML='<div class=wrap><h1>Application submitted ✓</h1><p>Thanks for applying to Acme Robotics.</p></div>'">
+  <div class="field"><label for="first_name">First Name <span class="req">*</span></label><input type="text" id="first_name" name="first_name" required></div>
+  <div class="field"><label for="last_name">Last Name <span class="req">*</span></label><input type="text" id="last_name" name="last_name" required></div>
+  <div class="field"><label for="email">Email <span class="req">*</span></label><input type="email" id="email" name="email" required></div>
+  <div class="field"><label for="phone">Phone</label><input type="tel" id="phone" name="phone"></div>
+  <div class="field"><label for="resume">Resume/CV <span class="req">*</span></label><input type="file" id="resume" name="resume" required></div>
+  <div class="field"><label for="loc">Location (City) <span class="req">*</span></label><input type="text" id="loc" name="job_application[location]" required></div>
+  <div class="field"><label for="li">LinkedIn Profile</label><input type="url" id="li" name="urls[LinkedIn]"></div>
+  <div class="field"><label for="web">Website / Portfolio</label><input type="url" id="web" name="urls[Portfolio]"></div>
+  <div class="field"><label for="comp">Current Company</label><input type="text" id="comp" name="org"></div>
+  <div class="field"><label for="sal">What are your salary expectations?</label><input type="text" id="sal"></div>
+  <div class="field"><label for="auth">Are you legally authorized to work in the United States? <span class="req">*</span></label>
+    <select id="auth" required><option value="">Select...</option><option value="1">Yes</option><option value="0">No</option></select></div>
+  <fieldset><legend>Will you now or in the future require visa sponsorship? <span class="req">*</span></legend>
+    <label><input type="radio" name="sponsor" value="yes" required> Yes</label><label><input type="radio" name="sponsor" value="no"> No</label></fieldset>
+  <div class="field"><label for="hear">How did you hear about us?</label><input type="text" id="hear"></div>
+  <div class="field"><label for="why">Why do you want to work at Acme Robotics? <span class="req">*</span></label><textarea id="why" required></textarea></div>
+  <div class="field"><label for="cl">Cover Letter</label><textarea id="cl"></textarea></div>
+  <div class="field"><label for="gender">Gender</label><select id="gender"><option value="">Select...</option><option>Male</option><option>Female</option><option>Non-binary</option><option>Decline to self-identify</option></select></div>
+  <div class="field"><label for="vet">Veteran Status</label><select id="vet"><option value="">Select...</option><option>I am a protected veteran</option><option>I am not a protected veteran</option><option>I don't wish to answer</option></select></div>
+  <div class="field"><label><input type="checkbox" required> I certify the information provided is accurate <span class="req">*</span></label></div>
+  <div class="field"><label><input type="checkbox"> Send me marketing emails about future roles</label></div>
+  <button type="submit">Submit Application</button>
+</form></div></body></html>
